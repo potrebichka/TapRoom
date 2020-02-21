@@ -2,6 +2,7 @@ import React from 'react';
 import Keg from './Keg';
 import PropTypes from 'prop-types';
 import paletteImg from '../assets/images/Palette.png';
+import {Link} from 'react-router-dom';
 
 const KegList = (props) => {
   return (
@@ -35,30 +36,39 @@ const KegList = (props) => {
                 .space {
                   color: white;
                 }
+                .employee-list {
+                  text-align: left;
+                }
+                .center {
+                  text-align: center;
+                  font-size: 30px;
+                  font-weight: bold;
+                }
             `}</style>
       <div className="text-box">
         <h1>List of available kegs:</h1>
         <br/>
-        {props.employee ? null : 
-        <div className="right"> 
-          Strength(ABV)<br/>
-          <img src={paletteImg} alt="strength palette"/>
-          <pre className="space">0                      12</pre>
-          
-        </div>}
-        <div className={props.employee ? null: "kegs-list"}>
+        {props.employee ? 
+          <div className="center"><Link to="/newkeg" >Create a new Keg</Link></div> : 
+          <div className="right"> 
+              Strength(ABV)<br/>
+              <img src={paletteImg} alt="strength palette"/>
+              <pre className="space">0                      12</pre>  
+          </div>
+        }
+        <div className={props.employee ? 'employee-list': 'kegs-list'}>
           {Object.keys(props.kegList).map(function(kegId)
-            {
-              var keg = props.kegList[kegId];
-              return <Keg name={keg.name} 
-                brand={keg.brand} 
-                price={keg.price} 
-                alcoholContent={keg.alcoholContent} 
-                ibu={keg.ibu}
-                key={kegId}
-                employee={props.employee}
-                />
-            }
+          {
+            var keg = props.kegList[kegId];
+            return <Keg name={keg.name} 
+              brand={keg.brand} 
+              price={keg.price} 
+              alcoholContent={keg.alcoholContent} 
+              ibu={keg.ibu}
+              key={kegId}
+              employee={props.employee}
+            />;
+          }
           )}
         </div>
       </div>

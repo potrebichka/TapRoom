@@ -16,20 +16,23 @@ class Keg extends React.Component {
   render() {
     let strengthClass = null;
     if (this.props.alcoholContent < 2) {
-      strengthClass = "first";
+      strengthClass = 'first';
     } else if (this.props.alcoholContent < 4) {
-      strengthClass = "second";
+      strengthClass = 'second';
     } else if (this.props.alcoholContent < 6) {
-      strengthClass = "third";
+      strengthClass = 'third';
     } else if (this.props.alcoholContent < 8) {
-      strengthClass = "fourth";
+      strengthClass = 'fourth';
     } else if (this.props.alcoholContent < 10) {
-      strengthClass = "fifth";
+      strengthClass = 'fifth';
     } else {
-      strengthClass = "sixth";
+      strengthClass = 'sixth';
     }
+    var soldButtonStyle = {
+      fontSize: '20px'
+    };
     return (
-      <div className='keg'>
+      <div className={this.props.employee ? 'keg employee' : 'keg'}>
         <style jsx>{`
           .keg {
               background: rgba(0,0,0,0.5);
@@ -68,22 +71,63 @@ class Keg extends React.Component {
             color: #581845;
           }
 
+          .employee {
+            text-align: center;
+            padding-left: 40px;
+          }
+
         `}</style>
 
-        <h3>{this.props.name}</h3>
-        <p><em>{this.props.brand}</em></p>
-        <p>${this.props.price}</p>
-        <p><span className={'left ' + strengthClass}>{this.props.alcoholContent}% ABV</span><span className="right">{this.props.ibu ? `${this.props.ibu} IBU`: 'NO IBU'}</span></p>
+        <h3> {this.props.employee ? 'Name: ' : null}  {this.props.name}</h3>
+        <p> {this.props.employee ? 'Brand: ' : null} <em>{this.props.brand}</em></p>
+        <p> {this.props.employee ? 'Price: ' : null} ${this.props.price}</p>
+        {this.props.employee ? 
+          <p>
+            Strength: 
+            <span className={strengthClass}>
+              {this.props.alcoholContent}% ABV
+            </span>
+            <br/>
+            <span>
+              IBU: {this.props.ibu ? `${this.props.ibu} IBU`: 'NO IBU'}
+            </span>
+          </p>
+          :
+          <p>
+            <span className={'left ' + strengthClass}>
+              {this.props.alcoholContent}% ABV
+            </span>
+            <span className="right">
+              {this.props.ibu ? `${this.props.ibu} IBU`: 'NO IBU'}
+            </span>
+          </p>
+        }
 
         {this.props.employee ? 
           <div>
             <p>Pints left: {this.state.pints <= 0 ? 0 : this.state.pints}</p>
 
-            <Button className="btn btn-success" onClick={() => this.setState({pints: this.state.pints-1})
-            }>Sold one pint</Button><br/><br/>
+            <Button 
+              className="btn btn-primary" style={soldButtonStyle}
+              onClick={() => this.setState({pints: this.state.pints-1})}>
+              Sold one pint
+            </Button>
+            <br/>
+            <br/>
 
-            <Checkbox onChange={() => this.setState({showEdit: !this.state.showEdit})}>Edit info</Checkbox>
-            {this.state.showEdit ? <EditKeg name={this.props.name} brand={this.props.brand} price={this.props.price} alcoholContent={this.props.alcoholContent} ibu={this.props.ibu}/> : null}
+            <Checkbox 
+              onChange={() => this.setState({showEdit: !this.state.showEdit})}>
+              Edit info
+            </Checkbox>
+
+            {this.state.showEdit ? 
+              <EditKeg 
+                name={this.props.name} 
+                brand={this.props.brand} 
+                price={this.props.price} 
+                alcoholContent={this.props.alcoholContent} 
+                ibu={this.props.ibu}/> 
+              : null}
 
           </div> 
           : null}
