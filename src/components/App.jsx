@@ -5,9 +5,30 @@ import Main from './Main';
 import NotFound from './NotFound';
 import KegList from './KegList';
 import wood_background from '../assets/images/wood_background.jpg';
+import {v4} from 'uuid';
 
 
-const App = () => {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      masterKegList: {},
+      selectedKeg: null
+    }
+  }
+
+  handleAddingNewKegToList = (newKeg) => {
+    const newKegId = v4();
+    const newMasterKegList = Object.assign({}, this.state.masterKegList, {[newKegId]: newKeg});
+    this.setState({masterKegList: newMasterKegList});
+  }
+
+  handleChangingSelectedKeg(kegId) {
+    this.setState({selectedKeg: kegId});
+  }
+
+
+  render() {
     return (
       <div className="page_background">
         <style jsx>{`
@@ -21,8 +42,8 @@ const App = () => {
         <Header />
         <Switch>
           <Route exact path='/' component={Main} />
-          <Route path='/list' render={() => <KegList employee={false}/>} />
-          <Route path='/account' render={() => <KegList employee={true}/>} />
+          <Route path='/list' render={() => <KegList kegList={this.state.masterKegList}/>} />
+          <Route path='/account' render={() => <Account kegList={this.state.masterKegList} onNewKegCreation={this.handleAddingNewKegToList} onKegSelection={this.handleChangingSelectedKeg} />} />
           <Route component={NotFound} />
         </Switch>
       </div>
