@@ -126,8 +126,8 @@ class App extends React.Component {
         <Header />
         <Switch>
           <Route exact path='/' component={Main} />
-          <Route path='/list' render={() => <KegList kegList={this.state.masterKegList}/>} />
-          <Route path='/account' render={() => <Account kegList={this.state.masterKegList} onNewKegCreation={this.handleAddingNewKegToList} onKegSelection={this.handleChangingSelectedKeg} />} />
+          <Route path='/list' render={() => <KegList kegList={this.state.masterKegList} employee={false}/>} />
+          <Route path='/account' render={() => <KegList kegList={this.state.masterKegList} onNewKegCreation={this.handleAddingNewKegToList} onKegSelection={this.handleChangingSelectedKeg} employee={true}/>} />
           <Route component={NotFound} />
         </Switch>
       </div>

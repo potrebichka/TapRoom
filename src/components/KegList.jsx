@@ -37,7 +37,9 @@ const KegList = (props) => {
                 brand={keg.brand} 
                 price={keg.price} 
                 alcoholContent={keg.alcoholContent} 
-                ibu={keg.ibu}/>
+                ibu={keg.ibu}
+                employee={props.employee}
+                />
             }
           )}
         </div>
@@ -49,7 +51,8 @@ const KegList = (props) => {
 };
 
 KegList.propTypes = {
-  kegList: PropTypes.object.isRequired
+  kegList: PropTypes.object.isRequired,
+  employee: PropTypes.bool.isRequired
 };
 
 
