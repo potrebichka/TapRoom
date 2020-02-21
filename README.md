@@ -21,6 +21,10 @@ App
     └── Not Found
 ```
 
+Diagram:
+
+![Diagram Flow](./src/assets/images/TapRoom.jpg)
+
 ## Installation:
 1. Clone this repo:
 ```
