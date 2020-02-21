@@ -14,15 +14,58 @@ class Keg extends React.Component {
   }
   
   render() {
+    let strengthClass = null;
+    if (this.props.alcoholContent < 2) {
+      strengthClass = "first";
+    } else if (this.props.alcoholContent < 4) {
+      strengthClass = "second";
+    } else if (this.props.alcoholContent < 6) {
+      strengthClass = "third";
+    } else if (this.props.alcoholContent < 8) {
+      strengthClass = "fourth";
+    } else if (this.props.alcoholContent < 10) {
+      strengthClass = "fifth";
+    } else {
+      strengthClass = "sixth";
+    }
     return (
       <div className='keg'>
         <style jsx>{`
           .keg {
               background: rgba(0,0,0,0.5);
-              min-width: 300px;
+              min-width: 400px;
               padding: 10px;
-              margin: 10px;
+              margin: 15px;
               text-align: center;
+              border: 1px solid white;
+          }
+
+          .left {
+            margin-left: 20px;
+            float: left;
+          }
+
+          .right {
+            float: right;
+            margin-right: 20px;
+          }
+          .first {
+            color: #DAF7A6;
+          }
+          .second {
+            color:#FFC300;
+          }
+          .third {
+            color: #FF5733;
+          }
+          .fourth {
+            color:#C70039;
+          }
+          .fifth {
+            color: #900C3F;
+          }
+          .sixth {
+            color: #581845;
           }
 
         `}</style>
@@ -30,8 +73,7 @@ class Keg extends React.Component {
         <h3>{this.props.name}</h3>
         <p><em>{this.props.brand}</em></p>
         <p>${this.props.price}</p>
-        <p>{this.props.alcoholContent}% ABV</p>
-        <p>{this.props.ibu ? `${this.props.ibu} IBU`: 'NO IBU'}</p>
+        <p><span className={'left ' + strengthClass}>{this.props.alcoholContent}% ABV</span><span className="right">{this.props.ibu ? `${this.props.ibu} IBU`: 'NO IBU'}</span></p>
 
         {this.props.employee ? 
           <div>

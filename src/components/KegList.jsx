@@ -1,7 +1,7 @@
 import React from 'react';
 import Keg from './Keg';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import paletteImg from '../assets/images/Palette.png';
 
 const KegList = (props) => {
   return (
@@ -21,14 +21,31 @@ const KegList = (props) => {
                 .kegs-list {
                     display: flex;
                     flex-wrap: wrap;
-                    justify-content: space-between;
+                    justify-content: space-around;
                 }
                 .text-box a {
                   font-size: 30px;
                 }
+                img {
+                  width: 300px;
+                }
+                .right {
+                  text-align: right;
+                }
+                .space {
+                  color: white;
+                }
             `}</style>
       <div className="text-box">
         <h1>List of available kegs:</h1>
+        <br/>
+        {props.employee ? null : 
+        <div className="right"> 
+          Strength(ABV)<br/>
+          <img src={paletteImg} alt="strength palette"/>
+          <pre className="space">0                      12</pre>
+          
+        </div>}
         <div className={props.employee ? null: "kegs-list"}>
           {Object.keys(props.kegList).map(function(kegId)
             {
@@ -38,6 +55,7 @@ const KegList = (props) => {
                 price={keg.price} 
                 alcoholContent={keg.alcoholContent} 
                 ibu={keg.ibu}
+                key={kegId}
                 employee={props.employee}
                 />
             }
