@@ -29,7 +29,7 @@ const KegList = (props) => {
             `}</style>
       <div className="text-box">
         <h1>List of available kegs:</h1>
-        <div className="kegs-list">
+        <div className={props.employee ? null: "kegs-list"}>
           {Object.keys(props.kegList).map(function(kegId)
             {
               var keg = props.kegList[kegId];
