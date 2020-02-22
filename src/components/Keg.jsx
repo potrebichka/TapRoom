@@ -32,7 +32,7 @@ class Keg extends React.Component {
       fontSize: '20px'
     };
     return (
-      <div className={this.props.employee ? 'keg employee' : 'keg'}>
+      <div className={this.props.employee ? this.state.pints <=10 ? 'keg employee red':'keg employee' : 'keg'}>
         <style jsx>{`
           .keg {
               background: rgba(0,0,0,0.5);
@@ -76,6 +76,10 @@ class Keg extends React.Component {
             padding-left: 40px;
           }
 
+          .red {
+            border: 3px solid red;
+          }
+
         `}</style>
 
         <h3> {this.props.employee ? 'Name: ' : null}  {this.props.name}</h3>
@@ -109,7 +113,7 @@ class Keg extends React.Component {
 
             <Button 
               className="btn btn-primary" style={soldButtonStyle}
-              onClick={() => this.setState({pints: this.state.pints-1})}>
+              onClick={() => this.setState({pints: this.state.pints > 1 ? this.state.pints-10 : this.state.pints})}>
               Sold one pint
             </Button>
             <br/>
