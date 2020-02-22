@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import EditKeg from './EditKeg';
 import {Button, Checkbox} from 'react-bootstrap';
 
@@ -11,6 +11,12 @@ class Keg extends React.Component {
       pints: 124,
       showEdit: false
     };
+    this.onEditKeg = this.onEditKeg.bind(this);
+  }
+
+  onEditKeg(updatedKeg) {
+    this.setState({showEdit: false});
+    this.props.onEditKeg(updatedKeg);
   }
   
   render() {
@@ -29,7 +35,10 @@ class Keg extends React.Component {
       strengthClass = 'sixth';
     }
     var soldButtonStyle = {
-      fontSize: '20px'
+      fontSize: '20px',
+      backgroundColor: "black",
+      color: "white",
+      border: "1px solid white"
     };
     return (
       <div className={this.props.employee ? this.state.pints <=10 ? 'keg employee red':'keg employee' : 'keg'}>
@@ -72,12 +81,28 @@ class Keg extends React.Component {
           }
 
           .employee {
-            text-align: center;
-            padding-left: 40px;
+            text-align: left;
+            padding: 40px;
+            max-width: 600px;
+            width: 70%;
+            margin: auto;
+            font-family: monospace
+          }
+
+          .employee p {
+            margin-bottom : 5px;
           }
 
           .red {
             border: 3px solid red;
+          }
+
+          .btn-custom {
+            background-color: black
+          }
+
+          .text {
+            color: white
           }
 
         `}</style>
@@ -109,24 +134,23 @@ class Keg extends React.Component {
 
         {this.props.employee ? 
           <div>
-            <p>Pints left: {this.state.pints <= 0 ? 0 : this.state.pints}</p>
-
-            <Button 
-              className="btn btn-primary" style={soldButtonStyle}
+            <pre><span className="text">Pints left: {this.state.pints <= 0 ? 0 : this.state.pints}</span>      <Button 
+              className="btn" style={soldButtonStyle}
               onClick={() => this.setState({pints: this.state.pints > 1 ? this.state.pints-10 : this.state.pints})}>
               Sold one pint
             </Button>
+            </pre>
             <br/>
-            <br/>
+    
 
             <Checkbox 
-              onChange={() => this.setState({showEdit: !this.state.showEdit})}>
+              onChange={() => this.setState({showEdit: !this.state.showEdit})} defaultChecked={this.state.showEdit} checked={this.state.showEdit}>
               Edit info
             </Checkbox>
 
             {this.state.showEdit ? 
               <EditKeg 
-                onEditKeg={this.props.onEditKeg}
+                onEditKeg={updatedKeg => this.onEditKeg(updatedKeg)}
                 name={this.props.name} 
                 brand={this.props.brand} 
                 price={this.props.price} 
