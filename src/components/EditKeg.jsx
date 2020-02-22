@@ -8,6 +8,26 @@ const EditKeg = (props) => {
     color: 'white',
     fontSize: '25px'
   };
+
+  let _name = null;
+  let _brand = null;
+  let _price = null;
+  let _alcoholContent = null;
+  let _ibu = null;
+
+  function handleEditKegFormSubmission(event) {
+    event.preventDefault();
+    _ibu.value ? props.onEditKeg({name: _name.value, brand: _brand.value, price: parseFloat(_price.value), alcoholContent: parseFloat(_alcoholContent.value), ibu: parseFloat(_ibu.value), id: props.id}) 
+    :
+    props.onEditKeg({name: _name.value, brand: _brand.value, price: parseFloat(_price.value), alcoholContent: parseFloat(_alcoholContent.value), id: props.id});
+    alert("Updated");
+    _name.value = '';
+    _brand.value='';
+    _price.value='';
+    _alcoholContent.value='';
+    _ibu.value='';
+  }  
+
   return (
     <div>
       <style jsx>{`
@@ -28,34 +48,61 @@ const EditKeg = (props) => {
             `}</style>
       <div className="text-box">
         <h1>Edit keg:</h1>
-        <Form>
+        <form onSubmit={handleEditKegFormSubmission}>
           <FormGroup>
             <ControlLabel>Enter a name of beer:</ControlLabel>
-            <FormControl type="text" placeholder={props.name} defaultValue={props.name}></FormControl>
+            <input className="form-control"
+              type="text" 
+              placeholder={props.name} 
+              defaultValue={props.name}
+              id="name"
+              ref={(input) => {_name = input;}}/>
           </FormGroup>
 
           <FormGroup>
             <ControlLabel>Enter name of brand:</ControlLabel>
-            <FormControl type="text" placeholder={props.brand} defaultValue={props.brand}></FormControl>
+            <input className="form-control"
+              type="text" 
+              placeholder={props.brand} 
+              defaultValue={props.brand}
+              id="brand"
+              ref={(input) => {_brand = input;}}/>
           </FormGroup>
 
           <FormGroup>
             <ControlLabel>Enter a price:</ControlLabel>
-            <FormControl type="number" step="0.01" placeholder={props.price} defaultValue={props.price}></FormControl>
+            <input className="form-control"
+              type="number" 
+              step="0.01" 
+              placeholder={props.price} 
+              defaultValue={props.price}
+              id="price"
+              ref={(input) => {_price = input;}}/>
           </FormGroup>
 
           <FormGroup>
             <ControlLabel>Enter an alcohol content:</ControlLabel>
-            <FormControl type="number" step="0.01" placeholder={props.alcoholContent} defaultValue={props.alcoholContent}></FormControl>
+            <input className="form-control"
+              type="number" 
+              step="0.01" 
+              placeholder={props.alcoholContent} 
+              defaultValue={props.alcoholContent} 
+              id="alcoholContent"
+              ref={(input) => {_alcoholContent = input;}}/>
           </FormGroup>
 
           <FormGroup>
             <ControlLabel>Enter an IBU (optional):</ControlLabel>
-            <FormControl type="number" placeholder={props.ibu} defaultValue={props.ibu}></FormControl>
+            <input className="form-control"
+              type="number" 
+              placeholder={props.ibu} 
+              defaultValue={props.ibu}
+              id="ibu" 
+              ref={(input) => {_ibu = input;}}/>
           </FormGroup>
 
-          <Button type="submit" className="btn btn-primary btn-custom">Submit</Button>
-        </Form>
+          <button type="submit" className="btn btn-primary btn-custom">Submit</button>
+        </form>
       </div>
 
     </div>
@@ -67,7 +114,9 @@ EditKeg.propTypes = {
   brand: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   alcoholContent: PropTypes.number.isRequired,
-  ibu: PropTypes.number
+  ibu: PropTypes.number,
+  id: PropTypes.string,
+  onEditKeg: PropTypes.func
 };
 
 export default EditKeg;

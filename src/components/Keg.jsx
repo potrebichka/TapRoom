@@ -122,11 +122,13 @@ class Keg extends React.Component {
 
             {this.state.showEdit ? 
               <EditKeg 
+                onEditKeg={this.props.onEditKeg}
                 name={this.props.name} 
                 brand={this.props.brand} 
                 price={this.props.price} 
                 alcoholContent={this.props.alcoholContent} 
-                ibu={this.props.ibu}/> 
+                ibu={this.props.ibu}
+                id={this.props.id}/> 
               : null}
 
           </div> 
@@ -143,7 +145,9 @@ Keg.propTypes = {
   price: PropTypes.number.isRequired,
   alcoholContent: PropTypes.number.isRequired,
   ibu: PropTypes.number,
-  employee: PropTypes.bool
+  id: PropTypes.string,
+  employee: PropTypes.bool,
+  onEditKeg: PropTypes.func
 };
 
 export default Keg;
