@@ -144,7 +144,7 @@ class Keg extends React.Component {
     
 
             <Checkbox 
-              onChange={() => this.setState({showEdit: !this.state.showEdit})} defaultChecked={this.state.showEdit} checked={this.state.showEdit}>
+              onChange={() => this.setState({showEdit: !this.state.showEdit})} defaultChecked={this.state.showEdit}>
               Edit info
             </Checkbox>
 

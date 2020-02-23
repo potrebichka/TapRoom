@@ -2,29 +2,42 @@ import React from 'react';
 import {Form, FormGroup, ControlLabel, FormControl, FieldGroup, Button, CheckBox } from 'react-bootstrap';
 import {Link, Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {useHistory} from 'react-router-dom';
 
-const NewKeg = (props) => {
-  const linkStyling = {
-    color: 'white',
-    fontSize: '25px'
-  };
+class NewKeg extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirect: false
+    }
 
-  let _name = null;
-  let _brand = null;
-  let _price = null;
-  let _abv = null;
-  let _ibu = null;
+    this._name = null;
+    this._brand = null;
+    this._price = null;
+    this._abv = null;
+    this._ibu = null;
+    this.handleNewKegFormSubmission = this.handleNewKegFormSubmission.bind(this);
+  }
 
-  function handleNewKegFormSubmission(event) {
+  handleNewKegFormSubmission(event) {
     event.preventDefault();
-    props.onNewKegCreation({name: _name.value, brand: _brand.value, price: _price.value, abv: _abv.value, ibu: _ibu.value});
-    _name.value = '';
-    _brand.value='';
-    _price.value='';
-    _abv.value='';
-    _ibu.value='';
+    this.props.onNewKegCreation({name: this._name.value, brand: this._brand.value, price: this._price.value, abv: this._abv.value, ibu: this._ibu.value});
+    this._name.value = '';
+    this._brand.value='';
+    this._price.value='';
+    this._abv.value='';
+    this._ibu.value='';
+    this.setState({redirect: true});
   }   
 
+  render() {
+    const linkStyling = {
+      color: 'white',
+      fontSize: '25px'
+    };
+    if (this.state.redirect) {
+      return <Redirect to="/list"/>
+    }
   return (
     <div>
       <style jsx>{`
@@ -46,14 +59,14 @@ const NewKeg = (props) => {
 
       <div className="text-box">
         <h1>Add a new keg:</h1>
-        <form onSubmit={handleNewKegFormSubmission}>
+        <form onSubmit={this.handleNewKegFormSubmission}>
           <FormGroup>
             <ControlLabel>Enter a name of beer:</ControlLabel>
             <input className="form-control"
               type="text" 
               placeholder="" 
               id="name"
-              ref={(input) => {_name = input;}}/>
+              ref={(input) => {this._name = input;}}/>
           </FormGroup>
 
           <FormGroup>
@@ -62,7 +75,7 @@ const NewKeg = (props) => {
               type="text" 
               placeholder="" 
               id="brand"
-              ref={(input) => {_brand = input;}}/>
+              ref={(input) => {this._brand = input;}}/>
           </FormGroup>
 
           <FormGroup>
@@ -72,7 +85,7 @@ const NewKeg = (props) => {
               step="0.01" 
               placeholder="" 
               id="price"
-              ref={(input) => {_price = input;}}/>
+              ref={(input) => {this._price = input;}}/>
           </FormGroup>
 
           <FormGroup>
@@ -82,7 +95,7 @@ const NewKeg = (props) => {
               step="0.01" 
               placeholder="" 
               id="abv"
-              ref={(input) => {_abv = input;}}/>
+              ref={(input) => {this._abv = input;}}/>
           </FormGroup>
 
           <FormGroup>
@@ -91,7 +104,7 @@ const NewKeg = (props) => {
               type="number" 
               placeholder=""
               id="ibu" 
-              ref={(input) => {_ibu = input;}}/>
+              ref={(input) => {this._ibu = input;}}/>
           </FormGroup>
 
           <button type="submit" className="btn btn-primary btn-custom">Submit</button>
@@ -100,6 +113,7 @@ const NewKeg = (props) => {
 
     </div>
   );
+      }
 };
 
 NewKeg.propTypes = {
