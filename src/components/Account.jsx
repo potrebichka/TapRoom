@@ -1,12 +1,7 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import KegList from './KegList';
 
 const Account = () => {
-  const linkStyling = {
-    color: 'white',
-    fontSize: '25px'
-  };
   return (
     <div>
       <style jsx>{`

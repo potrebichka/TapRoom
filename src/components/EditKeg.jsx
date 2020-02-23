@@ -1,13 +1,8 @@
 import React from 'react';
-import {Form, FormGroup, ControlLabel, FormControl, FieldGroup, Button, CheckBox } from 'react-bootstrap';
+import {FormGroup, ControlLabel } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import {Link, Redirect} from 'react-router-dom';
 
 const EditKeg = (props) => {
-  const linkStyling = {
-    color: 'white',
-    fontSize: '25px'
-  };
 
   let _name = null;
   let _brand = null;
@@ -18,8 +13,8 @@ const EditKeg = (props) => {
   function handleEditKegFormSubmission(event) {
     event.preventDefault();
     _ibu.value ? props.onEditKeg({name: _name.value, brand: _brand.value, price: parseFloat(_price.value), alcoholContent: parseFloat(_alcoholContent.value), ibu: parseFloat(_ibu.value), id: props.id}) 
-    :
-    props.onEditKeg({name: _name.value, brand: _brand.value, price: parseFloat(_price.value), alcoholContent: parseFloat(_alcoholContent.value), id: props.id});
+      :
+      props.onEditKeg({name: _name.value, brand: _brand.value, price: parseFloat(_price.value), alcoholContent: parseFloat(_alcoholContent.value), id: props.id});
 
     _name.value = '';
     _brand.value='';

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
 import EditKeg from './EditKeg';
 import {Button, Checkbox} from 'react-bootstrap';
 
@@ -36,9 +35,9 @@ class Keg extends React.Component {
     }
     var soldButtonStyle = {
       fontSize: '20px',
-      backgroundColor: "black",
-      color: "white",
-      border: "1px solid white"
+      backgroundColor: 'black',
+      color: 'white',
+      border: '1px solid white'
     };
     return (
       <div className={this.props.employee ? this.state.pints <=10 ? 'keg employee red':'keg employee' : 'keg'}>

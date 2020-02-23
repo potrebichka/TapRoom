@@ -1,15 +1,14 @@
 import React from 'react';
-import {Form, FormGroup, ControlLabel, FormControl, FieldGroup, Button, CheckBox } from 'react-bootstrap';
-import {Link, Redirect} from 'react-router-dom';
+import {FormGroup, ControlLabel} from 'react-bootstrap';
+import {Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {useHistory} from 'react-router-dom';
 
 class NewKeg extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       redirect: false
-    }
+    };
 
     this._name = null;
     this._brand = null;
@@ -31,16 +30,12 @@ class NewKeg extends React.Component {
   }   
 
   render() {
-    const linkStyling = {
-      color: 'white',
-      fontSize: '25px'
-    };
     if (this.state.redirect) {
-      return <Redirect to="/list"/>
+      return <Redirect to="/list"/>;
     }
-  return (
-    <div>
-      <style jsx>{`
+    return (
+      <div>
+        <style jsx>{`
         .text-box {
             background-color: rgba(0,0,0,0.7);
             font-size: 25px;
@@ -57,64 +52,64 @@ class NewKeg extends React.Component {
         }
       `}</style>
 
-      <div className="text-box">
-        <h1>Add a new keg:</h1>
-        <form onSubmit={this.handleNewKegFormSubmission}>
-          <FormGroup>
-            <ControlLabel>Enter a name of beer:</ControlLabel>
-            <input className="form-control"
-              type="text" 
-              placeholder="" 
-              id="name"
-              ref={(input) => {this._name = input;}}/>
-          </FormGroup>
+        <div className="text-box">
+          <h1>Add a new keg:</h1>
+          <form onSubmit={this.handleNewKegFormSubmission}>
+            <FormGroup>
+              <ControlLabel>Enter a name of beer:</ControlLabel>
+              <input className="form-control"
+                type="text" 
+                placeholder="" 
+                id="name"
+                ref={(input) => {this._name = input;}}/>
+            </FormGroup>
 
-          <FormGroup>
-            <ControlLabel>Enter name of brand:</ControlLabel>
-            <input className="form-control"
-              type="text" 
-              placeholder="" 
-              id="brand"
-              ref={(input) => {this._brand = input;}}/>
-          </FormGroup>
+            <FormGroup>
+              <ControlLabel>Enter name of brand:</ControlLabel>
+              <input className="form-control"
+                type="text" 
+                placeholder="" 
+                id="brand"
+                ref={(input) => {this._brand = input;}}/>
+            </FormGroup>
 
-          <FormGroup>
-            <ControlLabel>Enter a price:</ControlLabel>
-            <input className="form-control"
-              type="number" 
-              step="0.01" 
-              placeholder="" 
-              id="price"
-              ref={(input) => {this._price = input;}}/>
-          </FormGroup>
+            <FormGroup>
+              <ControlLabel>Enter a price:</ControlLabel>
+              <input className="form-control"
+                type="number" 
+                step="0.01" 
+                placeholder="" 
+                id="price"
+                ref={(input) => {this._price = input;}}/>
+            </FormGroup>
 
-          <FormGroup>
-            <ControlLabel>Enter an alcohol content:</ControlLabel>
-            <input className="form-control"
-              type="number" 
-              step="0.01" 
-              placeholder="" 
-              id="abv"
-              ref={(input) => {this._abv = input;}}/>
-          </FormGroup>
+            <FormGroup>
+              <ControlLabel>Enter an alcohol content:</ControlLabel>
+              <input className="form-control"
+                type="number" 
+                step="0.01" 
+                placeholder="" 
+                id="abv"
+                ref={(input) => {this._abv = input;}}/>
+            </FormGroup>
 
-          <FormGroup>
-            <ControlLabel>Enter an IBU (optional):</ControlLabel>
-            <input className="form-control"
-              type="number" 
-              placeholder=""
-              id="ibu" 
-              ref={(input) => {this._ibu = input;}}/>
-          </FormGroup>
+            <FormGroup>
+              <ControlLabel>Enter an IBU (optional):</ControlLabel>
+              <input className="form-control"
+                type="number" 
+                placeholder=""
+                id="ibu" 
+                ref={(input) => {this._ibu = input;}}/>
+            </FormGroup>
 
-          <button type="submit" className="btn btn-primary btn-custom">Submit</button>
-        </form>
+            <button type="submit" className="btn btn-primary btn-custom">Submit</button>
+          </form>
+        </div>
+
       </div>
-
-    </div>
-  );
-      }
-};
+    );
+  }
+}
 
 NewKeg.propTypes = {
   onNewKegCreation: PropTypes.func

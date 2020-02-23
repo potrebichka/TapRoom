@@ -51,9 +51,9 @@ const KegList = (props) => {
         {props.employee ? 
           <div className="center"><Link to="/newkeg" >Create a new Keg</Link></div> : 
           <div className="right"> 
-              Strength(ABV)<br/>
-              <img src={paletteImg} alt="strength palette"/>
-              <pre className="space">0                      12</pre>  
+            Strength(ABV)<br/>
+            <img src={paletteImg} alt="strength palette"/>
+            <pre className="space">0                      12</pre>  
           </div>
         }
         <div className={props.employee ? 'employee-list': 'kegs-list'}>
