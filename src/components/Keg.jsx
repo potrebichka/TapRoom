@@ -135,7 +135,7 @@ class Keg extends React.Component {
           <div>
             <pre><span className="text">Pints left: {this.state.pints <= 0 ? 0 : this.state.pints}</span>      <Button 
               className="btn" style={soldButtonStyle}
-              onClick={() => this.setState({pints: this.state.pints > 1 ? this.state.pints-10 : this.state.pints})}>
+              onClick={() => this.setState({pints: this.state.pints > 1 ? this.state.pints-1 : this.state.pints})}>
               Sold one pint
             </Button>
             </pre>
