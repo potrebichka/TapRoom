@@ -20,7 +20,7 @@ class NewKeg extends React.Component {
 
   handleNewKegFormSubmission(event) {
     event.preventDefault();
-    this.props.onNewKegCreation({name: this._name.value, brand: this._brand.value, price: this._price.value, abv: this._abv.value, ibu: this._ibu.value});
+    this.props.onNewKegCreation({name: this._name.value, brand: this._brand.value, price: parseFloat(this._price.value), alcoholContent: parseFloat(this._abv.value), ibu: parseFloat(this._ibu.value), pints: 124});
     this._name.value = '';
     this._brand.value='';
     this._price.value='';
@@ -31,7 +31,7 @@ class NewKeg extends React.Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to="/list"/>;
+      return <Redirect to="/account"/>;
     }
     return (
       <div>

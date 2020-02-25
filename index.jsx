@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 const render = Component => {
   ReactDOM.render(
+
       <HashRouter>
         <Component />
       </HashRouter>,
