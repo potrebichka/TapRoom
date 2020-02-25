@@ -2,7 +2,7 @@ import React from 'react';
 import Keg from './Keg';
 import PropTypes from 'prop-types';
 import paletteImg from '../assets/images/Palette.png';
-import {Link} from 'react-router-dom';
+import SubHeader from './SubHeader';
 
 const KegList = (props) => {
   return (
@@ -45,11 +45,12 @@ const KegList = (props) => {
                   font-weight: bold;
                 }
             `}</style>
+      {props.employee ? <SubHeader /> : null}
       <div className="text-box">
         <h1>List of available kegs:</h1>
         <br/>
         {props.employee ? 
-          <div className="center"><Link to="/newkeg" >Create a new Keg</Link></div> : 
+          null : 
           <div className="right"> 
             Strength(ABV)<br/>
             <img src={paletteImg} alt="strength palette"/>
