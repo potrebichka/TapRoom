@@ -18,9 +18,9 @@ const SubHeader = () => {
     textDecoration: 'none',
     color: 'white',
     textShadow: '1px 1px white',
-    borderLeft: '1px solid white',
-    borderBottom: '1px solid white',
-    padding: '10px'
+    borderLeft: "1px solid white",
+    borderBottom: "1px solid white",
+    padding: "10px"
   };
   return (
     <header style={header}>
