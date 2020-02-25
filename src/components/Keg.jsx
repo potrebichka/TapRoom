@@ -7,15 +7,19 @@ class Keg extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pints: 124,
       showEdit: false
     };
     this.onEditKeg = this.onEditKeg.bind(this);
+    this.handlePintsChange = this.handlePintsChange.bind(this);
   }
 
   onEditKeg(updatedKeg) {
     this.setState({showEdit: false});
     this.props.onEditKeg(updatedKeg);
+  }
+
+  handlePintsChange() {
+    this.props.onPintsChange(this.props.id);
   }
   
   render() {
@@ -133,9 +137,9 @@ class Keg extends React.Component {
 
         {this.props.employee ? 
           <div>
-            <pre><span className="text">Pints left: {this.state.pints <= 0 ? 0 : this.state.pints}</span>      <Button 
+            <pre><span className="text">Pints left: {this.props.pints}</span>      <Button 
               className="btn" style={soldButtonStyle}
-              onClick={() => this.setState({pints: this.state.pints > 1 ? this.state.pints-1 : this.state.pints})}>
+              onClick={this.handlePintsChange}>
               Sold one pint
             </Button>
             </pre>
@@ -173,8 +177,10 @@ Keg.propTypes = {
   alcoholContent: PropTypes.number.isRequired,
   ibu: PropTypes.number,
   id: PropTypes.string,
+  pints: PropTypes.number.isRequired,
   employee: PropTypes.bool,
-  onEditKeg: PropTypes.func
+  onEditKeg: PropTypes.func,
+  onPintsChange: PropTypes.func
 };
 
 export default Keg;

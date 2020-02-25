@@ -20,7 +20,8 @@ class App extends React.Component {
       name: 'Gold', 
       brand: 'Saint Archer Brewing Company', 
       price: 7.00, 
-      alcoholContent: 4.2
+      alcoholContent: 4.2,
+      pints: 124
     };
 
     newKegId = v4();
@@ -28,7 +29,8 @@ class App extends React.Component {
       name: 'Insignia',
       brand: 'Mystic Brewery',
       price: 8.50,
-      alcoholContent: 5.0
+      alcoholContent: 5.0, 
+      pints: 124
     };
 
     newKegId = v4();
@@ -37,7 +39,8 @@ class App extends React.Component {
       brand: 'Firestone Walker Brewing Company',
       price: 7.50,
       alcoholContent: 4.0,
-      ibu: 47
+      ibu: 47,
+      pints: 124
     };
 
     newKegId = v4();
@@ -46,7 +49,8 @@ class App extends React.Component {
       brand: 'Sierra Nevada Brewing Co.',
       price: 7.00,
       alcoholContent: 5.6,
-      ibu: 38
+      ibu: 38, 
+      pints: 124
     };
 
     newKegId = v4();
@@ -55,7 +59,8 @@ class App extends React.Component {
       brand: 'Victory Brewing Company',
       price: 8.00,
       alcoholContent: 9.5,
-      ibu: 25
+      ibu: 25,
+      pints: 124
     };
 
     newKegId = v4();
@@ -64,7 +69,8 @@ class App extends React.Component {
       brand: 'Cigar City Brewing',
       price: 7.50,
       alcoholContent: 4.2,
-      ibu: 5
+      ibu: 5,
+      pints: 124
     };
 
     newKegId = v4();
@@ -73,7 +79,8 @@ class App extends React.Component {
       brand: 'New Belgium Brewing Company',
       price: 7.00,
       alcoholContent: 5.2,
-      ibu: 22
+      ibu: 22, 
+      pints: 124
     };
 
     newKegId = v4();
@@ -82,7 +89,8 @@ class App extends React.Component {
       brand: 'Guinness',
       price: 8.00,
       alcoholContent: 4.2,
-      ibu: 45
+      ibu: 45,
+      pints: 124
     };
 
     newKegId = v4();
@@ -90,7 +98,8 @@ class App extends React.Component {
       name: 'Ginger Root Kombucha',
       brand: 'Urban Farm Fermentory',
       price: 9.00,
-      alcoholContent: 1.5
+      alcoholContent: 1.5,
+      pints: 124
     };
 
     this.state = {
@@ -99,6 +108,7 @@ class App extends React.Component {
     };
     this.handleAddingNewKegToList = this.handleAddingNewKegToList.bind(this);
     this.handleEditingKeg = this.handleEditingKeg.bind(this);
+    this.handlePintsChange = this.handlePintsChange.bind(this);
   }
 
   handleAddingNewKegToList(newKeg) {
@@ -111,8 +121,14 @@ class App extends React.Component {
 
 
   handleEditingKeg(updatedKeg) {
-    const newMasterKegList = Object.assign({}, this.state.masterKegList, {[updatedKeg.id]: updatedKeg});
-    this.setState({masterKegList: newMasterKegList});
+    const updatedMasterKegList = Object.assign({}, this.state.masterKegList, {[updatedKeg.id]: updatedKeg});
+    this.setState({masterKegList: updatedMasterKegList});
+  }
+
+  handlePintsChange(id) {
+    const updatedKeg = Object.assign({}, this.state.masterKegList[id], {pints: this.state.masterKegList[id].pints-1});
+    const updatedMasterKegList = Object.assign({}, this.state.masterKegList, {[id]: updatedKeg});
+    this.setState({masterKegList: updatedMasterKegList});
   }
 
 
@@ -131,7 +147,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component={Main} />
           <Route path='/list' render={() => <KegList kegList={this.state.masterKegList} employee={false}/>} />
-          <Route path='/account' render={() => <KegList kegList={this.state.masterKegList}  employee={true} onEditKeg={this.handleEditingKeg}/>} />
+          <Route path='/account' render={() => <KegList kegList={this.state.masterKegList}  employee={true} onEditKeg={this.handleEditingKeg} onPintsChange={this.handlePintsChange}/>} />
           <Route path='/newkeg' render={() => <NewKeg onNewKegCreation={this.handleAddingNewKegToList} />} />
           <Route component={NotFound} />
         </Switch>

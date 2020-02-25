@@ -67,8 +67,10 @@ const KegList = (props) => {
               ibu={keg.ibu}
               key={kegId}
               id={kegId}
+              pints={keg.pints}
               employee={props.employee}
               onEditKeg={props.onEditKeg}
+              onPintsChange={props.onPintsChange}
             />;
           }
           )}
@@ -83,7 +85,8 @@ const KegList = (props) => {
 KegList.propTypes = {
   kegList: PropTypes.object.isRequired,
   employee: PropTypes.bool.isRequired,
-  onEditKeg: PropTypes.func
+  onEditKeg: PropTypes.func,
+  onPintsChange: PropTypes.func
 };
 
 
